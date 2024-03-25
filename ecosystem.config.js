@@ -6,14 +6,15 @@ module.exports = {
   deploy : {
     production : {
       key: 'key.pem',
-      user : 'SSH_USERNAME',
+      user : 'bitnami',
       host : '44.211.56.122',
       ref  : 'origin/main',
-      repo : 'GIT_REPOSITORY',
+      repo : 'git@github.com:MACarpio/pr-deploy2.git',
       path : 'DESTINATION_PATH',
       'pre-deploy-local': '',
-      'post-deploy' : 'npm install && pm2 reload ecosystem.config.js --env production',
-      'pre-setup': ''
+      'post-deploy' : 'source ~/.nvm/nvm.sh && npm install && npm run build && pm2 reload ecosystem.config.js --env production',
+      'pre-setup': '',
+      'ssh_options': 'ForwardAgent=yes'
     }
   }
 };
